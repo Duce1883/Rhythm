@@ -26,6 +26,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
+    - name: Download and Install ChromeDriver
+      run: |
+        wget -q -O /tmp/chromedriver.zip https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.207/linux64/chrome-linux64.zip
+        unzip /tmp/chromedriver.zip -d /tmp
+        sudo mv /tmp/chromedriver /usr/local/bin/chromedriver
+        sudo chmod +x /usr/local/bin/chromedriver
+
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
