@@ -14,7 +14,7 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-chrome:latest
+        image: selenium/standalone-firefox:latest
         options: --shm-size=2g
 
     steps:
@@ -32,4 +32,4 @@ jobs:
 
     - name: Run Tests
       run: |
-        pytest --browser_name chrome test_main_page.py
+        pytest --browser_name firefox test_main_page.py
