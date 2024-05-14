@@ -3,6 +3,12 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime
+# Imports to get chrome driver working
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+# Imports to get firefox driver working
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 def pytest_addoption(parser):
@@ -17,11 +23,11 @@ def browser(request):
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         options = Options()
-        browser = webdriver.Chrome(options=options)
+        browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         browser.maximize_window()
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
-        browser = webdriver.Firefox()
+        browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
         browser.maximize_window()
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
